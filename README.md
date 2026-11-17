@@ -39,16 +39,18 @@ Full real response: [`scripts/sample_response.json`](scripts/sample_response.jso
 ### Measured (this repo, `scripts/benchmark.py`, local machine)
 | Site | Model | Input tok | Output tok | Time |
 |---|---|---|---|---|
-| python.org | Ollama `mistral:latest` (7B, Q4) | 1570 | 2631 | 57.3 s |
-| basecamp.com | Ollama `mistral:latest` | 1913 | 2313 | 51.4 s |
+| python.org | Ollama `mistral:latest` (7B, Q4) | 1570 | 2129 | 56.9 s |
+| basecamp.com | Ollama `mistral:latest` | 1913 | 2274 | 50.4 s |
+| python.org | Gemini `gemini-2.5-flash` | 1429 | 1835 | 22.1 s |
+| basecamp.com | Gemini `gemini-2.5-flash` | 1759 | 1565 | 20.6 s |
 
-Takeaways: input is only ~1.5–2k tokens after cleaning, **output (~2.3–2.6k) dominates** cost and time. Gemini and other hosted models were **not benchmarked** (no API key in the test environment) and **no accuracy benchmark was run**; no accuracy claims are made. JSON validity: both runs passed schema validation first try.
+Takeaways: input is only ~1.4–1.9k tokens after cleaning, **output (~1.6–2.3k) dominates** cost and time. Gemini 2.5 Flash was ~2.5x faster than local Mistral 7B. Gemini's reported output tokens exclude any internal thinking tokens, which are billed as output, so real cost is somewhat higher. OpenAI and Anthropic models were **not benchmarked**, and **no accuracy benchmark was run**; no accuracy claims are made. All four runs passed schema validation first try.
 
 ### Comparison (prices per 1M tokens, from third-party aggregators that cite provider pages, found Nov 2026 — confirm on the official pricing pages before relying on them)
 | Provider | Model | Input / Output | Speed | Context | JSON | Cost for ~2k in / 2.5k out |
 |---|---|---|---|---|---|---|
 | Ollama (local) | mistral 7B (measured) | free (own hardware) | **measured ~55 s** | 32k | schema-constrained `format` | $0 |
-| Google | Gemini 2.5 Flash | $0.30 / $2.50 ([source](https://www.kunalganglani.com/llm-prices/gemini-2.5-flash)) | est. fast (not measured) | ~1M | native JSON schema | ≈ $0.007 (+ thinking tokens) |
+| Google | Gemini 2.5 Flash | $0.30 / $2.50 ([source](https://www.kunalganglani.com/llm-prices/gemini-2.5-flash)) | **measured ~21 s** | ~1M | native JSON schema | ≈ $0.005 (+ thinking tokens) |
 | Anthropic | Claude Haiku 5.5 | $0.10 / $0.50 for ≤100k prompts ([source](https://docs.kanaries.net/articles/haiku-pricing)) | est. fast (not measured) | large | via tool use | ≈ $0.0015 |
 | OpenAI | GPT-5.4 mini | $0.75 / $4.50 ([source](https://pricepertoken.com/pricing-page/model/openai-gpt-5.4-mini)) | est. fast (not measured) | large | Structured Outputs | ≈ $0.013 |
 
@@ -56,8 +58,8 @@ Cost formula: `in/1e6*price_in + out/1e6*price_out` using the measured token cou
 
 ### Recommendation
 - **Primary: Ollama local model** — zero API cost, schema-constrained JSON worked reliably; slower (~1 min) on this hardware. Use a stronger local/Ollama-hosted model if quality is lacking.
-- **Fallback / fast path: Gemini 2.5 Flash** (≈ $0.007 per analysis, native JSON schema, huge context, free tier) — configured via `GEMINI_API_KEY`, used automatically if Ollama fails, or set `LLM_PROVIDER=gemini` for speed. Re-run `scripts/benchmark.py` with a key to replace the estimates above with measurements.
-- Expected: ~2k input + ~2.5k output tokens per analysis.
+- **Fallback / fast path: Gemini 2.5 Flash** (≈ $0.005 per analysis, measured ~21 s, native JSON schema, huge context, free tier) — configured via `GEMINI_API_KEY`, used automatically if Ollama fails, or set `LLM_PROVIDER=gemini` for speed.
+- Expected: ~1.5–1.9k input + ~1.6–2.3k output tokens per analysis.
 
 ### Cost optimisation (implemented)
 Cleaned text instead of raw HTML and de-duplication; ~9k-char cap; at most 3 pages; **a single call for all five sections** (page is sent once); terse prompt, with field descriptions living in the schema; schema-constrained output avoids retry calls; competitor verification uses plain HTTP fetches, not the LLM; per-URL cache; small/local model by default with fallback only on failure.
