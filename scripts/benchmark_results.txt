@@ -1,0 +1,4 @@
+https://www.python.org | ollama:mistral:latest | in=1570 out=2631 | 57.28s
+https://www.python.org | gemini | skipped: LLM unavailable or returned invalid output (gemini: HTTPStatusError)
+https://www.basecamp.com | ollama:mistral:latest | in=1913 out=2313 | 51.38s
+https://www.basecamp.com | gemini | skipped: LLM unavailable or returned invalid output (gemini: HTTPStatusError)
