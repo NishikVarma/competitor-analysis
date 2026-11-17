@@ -1,0 +1,303 @@
+$ curl -X POST localhost:4000/link-analysis -d {"url":"https://www.python.org"}
+{
+  "success": true,
+  "website": "https://www.python.org/",
+  "brand": {
+    "name": "Python.org",
+    "category": "Programming Language",
+    "summary": "The official home of the Python Programming Language, dedicated to promoting, protecting, and advancing the language and supporting its diverse global community."
+  },
+  "analysis": {
+    "competitor_analysis": {
+      "brand_overview": "Python is a powerful, fast, open-source, and easy-to-learn programming language that runs everywhere and plays well with other technologies, used across various application domains.",
+      "main_products_services": [
+        "Python programming language",
+        "Documentation and tutorials",
+        "Python Package Index (PyPI)",
+        "Community support and events",
+        "Job board"
+      ],
+      "competitors": [
+        {
+          "name": "Java",
+          "website": "https://www.java.com/",
+          "products": [
+            "Java Development Kit (JDK)",
+            "Java Runtime Environment (JRE)",
+            "Spring Framework",
+            "Hibernate"
+          ],
+          "strengths": [
+            "Platform independence",
+            "Strong enterprise support",
+            "Robust ecosystem",
+            "High performance for large applications"
+          ],
+          "weaknesses": [
+            "Verbose syntax",
+            "Steeper learning curve",
+            "Higher memory consumption",
+            "Slower development cycles"
+          ],
+          "source": "verified_from_website",
+          "verified_summary": "Java | Oracle \u00e2\u20ac\u201d  | Java | Java to run desktop applications | Developers and Enterprise Administrators"
+        },
+        {
+          "name": "JavaScript",
+          "website": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "products": [
+            "Core language",
+            "Node.js runtime",
+            "React",
+            "Angular",
+            "Vue.js"
+          ],
+          "strengths": [
+            "Universal for web development (frontend & backend)",
+            "Large ecosystem",
+            "Asynchronous capabilities",
+            "Dynamic and flexible"
+          ],
+          "weaknesses": [
+            "Type coercion issues",
+            "Performance variability",
+            "Security concerns in some contexts",
+            "Can be less structured"
+          ],
+          "source": "verified_from_website",
+          "verified_summary": "JavaScript | MDN \u00e2\u20ac\u201d JavaScript (JS) is a lightweight interpreted (or just-in-time compiled) programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acroba | JavaScript | In this article | Beginner's tutorials | JavaScript guides | Fundamental language guides"
+        },
+        {
+          "name": "C++",
+          "website": "https://isocpp.org/",
+          "products": [
+            "C++ compilers (GCC, Clang)",
+            "Standard Library",
+            "Boost libraries",
+            "Qt framework"
+          ],
+          "strengths": [
+            "High performance",
+            "Low-level memory control",
+            "System programming",
+            "Game development",
+            "Embedded systems"
+          ],
+          "weaknesses": [
+            "Complex syntax",
+            "Steep learning curve",
+            "Manual memory management",
+            "Longer compilation times"
+          ],
+          "source": "verified_from_website",
+          "verified_summary": "Standard C++ \u00e2\u20ac\u201d  |  | News, Status & Discussion about Standard\u00c2\u00a0C++ | Follow All Posts All Posts RSS | Recent Highlights News RSS | Articles & Books Articles & Books RSS"
+        }
+      ],
+      "brand_advantages": [
+        "Friendly and easy to learn",
+        "Powerful and fast",
+        "Runs everywhere (platform-independent)",
+        "Open-source license",
+        "Extensive standard library and third-party modules (PyPI)",
+        "Strong, diverse, and international community"
+      ],
+      "positioning_opportunities": [
+        "Emphasize ease of learning for beginners and non-programmers",
+        "Highlight versatility for web, scientific, education, and business applications",
+        "Showcase the strength of the open-source community and extensive module ecosystem",
+        "Position as a foundational language for various tech careers"
+      ]
+    },
+    "target_search_queries": [
+      {
+        "query": "learn python programming for beginners",
+        "platforms": [
+          "Google",
+          "Instagram",
+          "LinkedIn"
+        ],
+        "intent": "Informational",
+        "business_relevance": "Attracts new users to the language and community",
+        "target_audience": "Students, aspiring developers, career changers"
+      },
+      {
+        "query": "download python installer",
+        "platforms": [
+          "Google"
+        ],
+        "intent": "Transactional",
+        "business_relevance": "Directs users to acquire the software",
+        "target_audience": "Developers, users needing the interpreter"
+      },
+      {
+        "query": "python web development frameworks",
+        "platforms": [
+          "Google",
+          "LinkedIn"
+        ],
+        "intent": "Informational",
+        "business_relevance": "Guides developers to specific application areas",
+        "target_audience": "Web developers, software engineers"
+      },
+      {
+        "query": "python scientific computing libraries",
+        "platforms": [
+          "Google",
+          "LinkedIn"
+        ],
+        "intent": "Informational",
+        "business_relevance": "Connects users with tools for data analysis and research",
+        "target_audience": "Data scientists, researchers, academics"
+      },
+      {
+        "query": "python developer jobs",
+        "platforms": [
+          "Google",
+          "LinkedIn",
+          "X"
+        ],
+        "intent": "Transactional",
+        "business_relevance": "Connects community members with employment opportunities",
+        "target_audience": "Job seekers, recruiters, employers"
+      }
+    ],
+    "seo_improvements": {
+      "primary_keyword": "Python programming language",
+      "secondary_keywords": [
+        "learn Python",
+        "Python download",
+        "Python documentation",
+        "Python community",
+        "Python applications"
+      ],
+      "long_tail_keywords": [
+        "how to learn python for beginners",
+        "download python for Windows",
+        "best python libraries for data science",
+        "python web development tutorial"
+      ],
+      "business_keywords": [
+        "Python Software Foundation",
+        "Python development services",
+        "Python consulting"
+      ],
+      "recommended_title": "Python.org | The Official Home of the Python Programming Language",
+      "meta_description": "The official website for the Python programming language. Download Python, access documentation, join the community, and explore applications for web, scientific, education, and more.",
+      "supporting_content": [
+        "Beginner's Guide to Python",
+        "Python Documentation",
+        "Python Package Index (PyPI)",
+        "Applications for Python",
+        "Community Events and Meetups",
+        "Python Job Board"
+      ]
+    },
+    "top_services": [
+      {
+        "name": "Python Programming Language",
+        "description": "The core open-source programming language, freely usable and distributable for various applications.",
+        "target_industry": "Software Development, Web Development, Data Science, Education",
+        "target_customer": "Programmers, developers, students, researchers",
+        "main_benefit": "Provides a versatile, powerful, and easy-to-learn tool for software creation",
+        "inferred": false
+      },
+      {
+        "name": "Documentation and Tutorials",
+        "description": "Comprehensive online guides, standard library documentation, and tutorials for all skill levels.",
+        "target_industry": "Education, Software Development",
+        "target_customer": "Beginner programmers, experienced developers, educators",
+        "main_benefit": "Facilitates learning and effective use of the Python language and its features",
+        "inferred": false
+      },
+      {
+        "name": "Python Package Index (PyPI)",
+        "description": "A repository hosting thousands of third-party modules and libraries to extend Python's functionality.",
+        "target_industry": "All industries using Python",
+        "target_customer": "Developers, data scientists, researchers",
+        "main_benefit": "Provides access to a vast ecosystem of tools for diverse application needs",
+        "inferred": false
+      },
+      {
+        "name": "Community Support and Events",
+        "description": "A global network offering conferences, meetups, mailing lists, and collaborative opportunities.",
+        "target_industry": "Software Development, Education",
+        "target_customer": "Python users, developers, educators, enthusiasts",
+        "main_benefit": "Fosters collaboration, knowledge sharing, and problem-solving among users",
+        "inferred": false
+      },
+      {
+        "name": "Python Job Board",
+        "description": "A community-run platform connecting employers with Python-related job opportunities and job seekers.",
+        "target_industry": "Recruitment, Technology",
+        "target_customer": "Python developers seeking employment, companies hiring Python talent",
+        "main_benefit": "Facilitates career growth and talent acquisition within the Python ecosystem",
+        "inferred": false
+      }
+    ],
+    "target_audience": {
+      "primary_audience": [
+        "New programmers",
+        "Experienced developers"
+      ],
+      "secondary_audience": [
+        "Educators",
+        "Researchers",
+        "Data scientists",
+        "Web developers",
+        "Software developers",
+        "Businesses"
+      ],
+      "industries": [
+        "Web and Internet Development",
+        "Scientific and Numeric",
+        "Education",
+        "Software and Game Development",
+        "Business Applications"
+      ],
+      "business_types": [
+        "Startups",
+        "Enterprises",
+        "Educational institutions",
+        "Research organizations",
+        "Individual developers"
+      ],
+      "customer_profiles": [
+        "Students learning to code",
+        "Hobbyist programmers",
+        "Professional software engineers",
+        "Data analysts and scientists",
+        "Academics and researchers",
+        "IT managers"
+      ],
+      "location_focus": [
+        "International",
+        "Global community"
+      ],
+      "customer_needs": [
+        "Easy-to-learn programming language",
+        "Powerful and versatile tools",
+        "Extensive libraries and modules",
+        "Strong community support",
+        "Career opportunities",
+        "Open-source flexibility"
+      ],
+      "customer_interests": [
+        "Programming",
+        "Software development",
+        "Data science",
+        "Web development",
+        "Automation",
+        "Open-source projects",
+        "Community collaboration"
+      ],
+      "recommended_segments": [
+        "Beginner Programmers",
+        "Professional Developers (Web, Scientific, Business)",
+        "Educators & Researchers",
+        "Open-Source Contributors"
+      ]
+    }
+  }
+}
+HTTP 200
+

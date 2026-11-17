@@ -1,0 +1,3 @@
+$ curl -X POST localhost:4000/link-analysis -d {"url":"https://nonexistent-domain-xyz123.com"}
+{"success":false,"error":"Could not resolve host 'nonexistent-domain-xyz123.com'"}
+HTTP 502

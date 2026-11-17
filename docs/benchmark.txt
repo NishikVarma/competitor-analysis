@@ -1,0 +1,4 @@
+https://www.python.org | ollama:mistral:latest | in=1570 out=2129 | 56.88s
+https://www.python.org | gemini:gemini-2.5-flash | in=1429 out=1835 | 22.07s
+https://www.basecamp.com | ollama:mistral:latest | in=1913 out=2274 | 50.35s
+https://www.basecamp.com | gemini:gemini-2.5-flash | in=1759 out=1565 | 20.58s

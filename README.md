@@ -63,3 +63,11 @@ Cost formula: `in/1e6*price_in + out/1e6*price_out` using the measured token cou
 
 ### Cost optimisation (implemented)
 Cleaned text instead of raw HTML and de-duplication; ~9k-char cap; at most 3 pages; **a single call for all five sections** (page is sent once); terse prompt, with field descriptions living in the schema; schema-constrained output avoids retry calls; competitor verification uses plain HTTP fetches, not the LLM; per-URL cache; small/local model by default with fallback only on failure.
+
+## Screenshots / logs (`docs/`)
+- Swagger UI at `/docs`: ![Swagger UI](docs/swagger.png)
+- Successful analysis (Gemini, python.org, HTTP 200): [`docs/request_success.txt`](docs/request_success.txt)
+- Private address blocked (SSRF, HTTP 400): [`docs/error_private_url.txt`](docs/error_private_url.txt)
+- Invalid URL (HTTP 422): [`docs/error_invalid_url.txt`](docs/error_invalid_url.txt)
+- Unresolvable domain (HTTP 502): [`docs/error_unreachable.txt`](docs/error_unreachable.txt)
+- Tests: [`docs/pytest.txt`](docs/pytest.txt) · Benchmark: [`docs/benchmark.txt`](docs/benchmark.txt) · Server log: [`docs/server.log`](docs/server.log)
