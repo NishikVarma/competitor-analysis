@@ -70,4 +70,5 @@ Cleaned text instead of raw HTML and de-duplication; ~9k-char cap; at most 3 pag
 - Private address blocked (SSRF, HTTP 400): [`docs/error_private_url.txt`](docs/error_private_url.txt)
 - Invalid URL (HTTP 422): [`docs/error_invalid_url.txt`](docs/error_invalid_url.txt)
 - Unresolvable domain (HTTP 502): [`docs/error_unreachable.txt`](docs/error_unreachable.txt)
+- Blocked site rejected (HTTP 422): [`docs/error_blocked_site.txt`](docs/error_blocked_site.txt)
 - Tests: [`docs/pytest.txt`](docs/pytest.txt) · Benchmark: [`docs/benchmark.txt`](docs/benchmark.txt) · Server log: [`docs/server.log`](docs/server.log)

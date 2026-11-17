@@ -88,3 +88,29 @@ def test_endpoint_happy_path(monkeypatch):
 
 def test_flat_schema_has_no_refs():
     assert "$ref" not in str(llm_service._flat_schema(LLMResult))
+
+
+def test_blocked_or_empty_page_rejected(monkeypatch):
+    import asyncio
+
+    from app.services import website_extractor as we
+
+    async def empty(client, url):
+        return b"<html><head></head><body></body></html>"
+
+    monkeypatch.setattr(we, "fetch_html", empty)
+    with pytest.raises(AppError) as e:
+        asyncio.run(we.extract_site("https://blocked.example"))
+    assert e.value.status_code == 422
+
+
+def test_duplicate_platforms_collapsed():
+    from app.schemas import SearchQuery
+
+    q = SearchQuery(query="q", platforms=["Google"] * 5, intent="i", business_relevance="r", target_audience="a")
+    assert q.platforms == ["Google"]
+
+
+def test_utf8_bytes_without_charset_decode_correctly():
+    p = parse("<title>Walmart — Save</title>".encode("utf-8"), "https://w.com")
+    assert p["title"] == "Walmart — Save"

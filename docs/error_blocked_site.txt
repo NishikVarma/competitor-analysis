@@ -1,0 +1,3 @@
+$ curl -X POST localhost:4000/link-analysis -d {"url":"https://www.amazon.in"}
+{"success":false,"error":"Website blocked automated access or has no readable text (e.g. JavaScript-only page)"}
+HTTP 422

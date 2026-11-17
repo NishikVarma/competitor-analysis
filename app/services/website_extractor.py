@@ -12,7 +12,7 @@ KEY_PAGE = re.compile(r"about|service|product|solution|what-we-do", re.I)
 NOISE = ("script", "style", "noscript", "svg", "nav", "footer", "header", "form", "iframe")
 
 
-async def fetch_html(client: httpx.AsyncClient, url: str) -> str:
+async def fetch_html(client: httpx.AsyncClient, url: str) -> bytes:
     """GET with manual redirects so every hop is SSRF-checked; body size capped."""
     for _ in range(4):
         await asyncio.to_thread(validate_public_url, url)
@@ -30,7 +30,7 @@ async def fetch_html(client: httpx.AsyncClient, url: str) -> str:
                     body += chunk
                     if len(body) > settings.max_response_bytes:
                         break
-                return body.decode(r.encoding or "utf-8", errors="ignore")
+                return body  # raw bytes: BeautifulSoup detects charset (meta/utf-8) instead of guessing latin-1
         except httpx.TimeoutException:
             raise AppError(504, "Website timed out")
         except httpx.HTTPError as e:
@@ -38,7 +38,7 @@ async def fetch_html(client: httpx.AsyncClient, url: str) -> str:
     raise AppError(502, "Too many redirects")
 
 
-def parse(html: str, base: str) -> dict:
+def parse(html: str | bytes, base: str) -> dict:
     """Compact page facts: title, meta, headings, de-duplicated text, same-site key links."""
     soup = BeautifulSoup(html, "html.parser")
     meta = lambda **a: (soup.find("meta", attrs=a) or {}).get("content", "")  # noqa: E731
@@ -77,6 +77,8 @@ async def extract_site(url: str, max_pages: int = 3) -> tuple[dict, str]:
     """Homepage + up to 2 about/services pages -> (homepage facts, compact text for the LLM)."""
     async with await make_client() as client:
         home = parse(await fetch_html(client, url), url)
+        if len(home["title"]) + len(home["description"]) + len(home["text"]) < 200:
+            raise AppError(422, "Website blocked automated access or has no readable text (e.g. JavaScript-only page)")
         parts = [f"TITLE: {home['title']}\nDESC: {home['description']}\nHEADINGS: {' | '.join(home['headings'])}\n{home['text']}"]
         for link in home["links"][: max_pages - 1]:
             try:

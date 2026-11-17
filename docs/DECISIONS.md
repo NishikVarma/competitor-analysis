@@ -24,3 +24,10 @@
 - No database, auth, rate limiting or queue: not in the spec.
 - No headless browser / JS rendering: heavy and not required.
 - No separate model per task: a single small model for one call keeps it simple.
+
+## Added after testing amazon.in
+- **Reject blocked/empty pages (HTTP 422)** instead of letting the LLM answer from memory, which produced content not on the site and false `inferred: false` labels. Log: `docs/error_blocked_site.txt`.
+- **Distinct platforms per query** (schema + validator dedupe) and a prompt that spreads queries across all five platforms; a small model had returned `["Google" x5]`.
+- **Region-aware competitors**: the prompt tells the model to infer the target market from the domain (e.g. `.in` = India) and to always give official competitor domains so they can be verified.
+- **Charset fix**: pages are passed to BeautifulSoup as bytes so UTF-8 dashes no longer turn into `â€”`.
+- Tests added for each (16 total).

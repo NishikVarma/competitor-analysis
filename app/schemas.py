@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, Field, HttpUrl
+from pydantic import BaseModel, Field, HttpUrl, field_validator
 
 Platform = Literal["Google", "Facebook", "Instagram", "LinkedIn", "X"]
 
@@ -35,10 +35,15 @@ class CompetitorAnalysis(BaseModel):
 
 class SearchQuery(BaseModel):
     query: str
-    platforms: list[Platform]
+    platforms: list[Platform] = Field(min_length=1, max_length=5, description="Distinct platforms where this query suits")
     intent: str
     business_relevance: str
     target_audience: str
+
+    @field_validator("platforms")
+    @classmethod
+    def _distinct(cls, v):  # small models repeat items; keep order, drop repeats
+        return list(dict.fromkeys(v))
 
 
 class SEOImprovements(BaseModel):

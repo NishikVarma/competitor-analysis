@@ -9,9 +9,11 @@ from app.services.website_extractor import extract_site
 _cache: dict[str, tuple[float, AnalysisResponse]] = {}
 
 PROMPT = """Analyze the website below and fill the JSON schema. Be concise (short phrases, no filler).
-Rules: use only facts from the website content; top_services must come from the site (set inferred=true only if you had to infer);
-competitors = at least 3 real, well-known companies in the same category with their homepage URL (leave website empty if unsure);
-search queries: 5 queries a customer would type, each with suited platforms; never give search volumes.
+Rules: use only facts from the website content; top_services must be named in the content (inferred=false only then, otherwise inferred=true);
+brand_overview = 2 sentences on what the business does, no competitor names;
+competitors = at least 3 real companies in the same category that operate in the site's target country/market (infer it from the domain, e.g. .in = India, and content), each with its official homepage URL (give the real domain for any well-known company; empty only if truly unknown);
+search queries: 5 different queries a customer would type; give each 1-3 DIFFERENT platforms from Google, Facebook, Instagram, LinkedIn, X, and spread the five queries across all five platforms; never give search volumes;
+long_tail_keywords = 3+ word phrases; supporting_content = specific page/article titles for this business.
 WEBSITE: {url}
 CONTENT:
 {content}"""
